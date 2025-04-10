@@ -1,0 +1,27 @@
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Univers";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$id = 1; 
+$newName = "Henok Haile Gebru";
+$newEmail = "henok@gmail.com";
+
+$sql = "UPDATE Form SET name='$newName', email='$newEmail' WHERE id=$id";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully!";
+} else {
+    echo "Error updating record: " . $conn->error;
+}
+
+$conn->close();
+?>
