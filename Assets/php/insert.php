@@ -1,58 +1,33 @@
 <?php
 
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$database = "univers"; 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "univers";
 
-
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "Connected successfully!<br>";
 }
 
+// Data to insert
+$name = "Hani Weldemichael Kesete";
+$email = "Hani@gmail.com";
+$phone = "+251937373149";
+$message = "The first data and comment inserted";
 
 
-$name = $_POST['name'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$message = $_POST['message'];
+$stmt = $conn->prepare("INSERT INTO form (name, email, phone, message) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $name, $email, $phone, $message); 
 
-$insert_sql = "INSERT INTO form (name, email, phone, message) VALUES ('$name', '$email', '$phone', '$message')";
-
-if ($conn->query($insert_sql) === TRUE) {
-    echo "New record inserted successfully!<br>";
+if ($stmt->execute()) {
+    echo "Data recorded successfully";
 } else {
-    echo "Error inserting data: " . $conn->error . "<br>";
+    echo "Error: " . $stmt->error;
 }
 
-// SQL query to retrieve data from a table (replace 'your_table_name' with the actual table name)
-$sql = "SELECT * FROM form";
-$result = $conn->query($sql);
-
-// Check if the table has data and display it
-if ($result->num_rows > 0) {
-    echo "<table border='1'>"; // Create an HTML table
-    echo "<tr><th>Column1</th><th>Column2</th><th>Column3</th></tr>";
-    
- 
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['name'] . "</td>"; 
-        echo "<td>" . $row['email'] . "</td>"; 
-        echo "<td>" . $row['phone'] . "</td>"; 
-        echo "<td>" . $row['message'] . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-} else {
-    echo "No data found in the table.";
-}
-
-
+$stmt->close();
 $conn->close();
 ?>

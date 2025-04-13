@@ -1,10 +1,4 @@
 
-* {
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    justify-content: center;
-}
-
 :root {
     --primary: #2C3E50;
     --secondary: #cfe85f;
@@ -32,7 +26,7 @@ body {
 
 .nav {
     background: white;
-    padding: 20px;
+    padding: 1px;
     box-shadow: 0 4px 20px rgb(7, 20, 0);
 }
 
@@ -47,14 +41,14 @@ body {
     text-decoration: none;
     color: var(--primary);
     font-weight: bold;
-    transition: color 0.3s;
+   
 }
 
 .nav a:hover {
     color: var(--accent);
     color: #0b0000;
     background-color:rgb(5, 247, 74);
-    padding: 15px;
+    padding: 10px;
     border-radius: 30px;
 }
 
@@ -86,14 +80,4 @@ body {
     padding: 20px;
     background: var(--primary);
     color: #f3f3f2;
-    font-size: larger;
-}
-
-.photo{
-    margin-left: 100px;
-    border-radius: 50%;
-}
-.logo{
-    margin-left: 100px;
-    border-radius: 50%;
 }
